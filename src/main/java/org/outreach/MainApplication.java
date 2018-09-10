@@ -16,6 +16,7 @@ public class MainApplication extends Jooby {
 
         use(new Gzon());
         use(BeerController.class);
+        use(TestController.class);
         use(new ApiTool()
                 .swagger("/swagger")
         );

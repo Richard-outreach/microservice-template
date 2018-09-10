@@ -4,6 +4,7 @@ import org.jooby.mvc.*;
 
 import javax.inject.Named;
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,6 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BeerController {
 
     private static final ConcurrentHashMap<String, Beer> BEER_MAP = new ConcurrentHashMap<>();
+
+    @GET
+    @Path(value = "/env")
+    public Map<String, String> getEnv() {
+        return System.getenv();
+    }
 
     /**
      * Gets a beer

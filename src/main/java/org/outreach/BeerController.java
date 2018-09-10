@@ -15,12 +15,6 @@ public class BeerController {
 
     private static final ConcurrentHashMap<String, Beer> BEER_MAP = new ConcurrentHashMap<>();
 
-    @GET
-    @Path(value = "/env")
-    public Map<String, String> getEnv() {
-        return System.getenv();
-    }
-
     /**
      * Gets a beer
      * @param id the id of the beer

@@ -21,13 +21,8 @@ public class MainApplication extends Jooby {
                 .swagger("/swagger")
         );
         use(new Metrics()
-                .request()
-                .threadDump()
                 .ping()
                 .healthCheck("db", new Check())
-                .metric("memory", new MemoryUsageGaugeSet())
-                .metric("threads", new ThreadStatesGaugeSet())
-                .metric("gc", new GarbageCollectorMetricSet())
         );
     }
 

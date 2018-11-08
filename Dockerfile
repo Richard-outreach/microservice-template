@@ -16,4 +16,4 @@ COPY --from=builder /usr/src/myapp/target/TestService-1.0.0.jar ./app.jar
 COPY --from=builder /usr/src/myapp/target/lib ./lib
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "./app.jar"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "./app.jar"]

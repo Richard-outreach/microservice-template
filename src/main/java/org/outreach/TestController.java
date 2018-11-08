@@ -1,5 +1,10 @@
 package org.outreach;
 
+import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatchClientBuilder;
+import com.amazonaws.services.cloudwatch.model.*;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.jooby.Mutant;
 import org.jooby.Request;
 import org.jooby.mvc.Consumes;
@@ -10,9 +15,16 @@ import org.jooby.mvc.Produces;
 import java.util.HashMap;
 import java.util.Map;
 
+@Log4j2
 @Consumes("application/json")
 @Produces("application/json")
 public class TestController {
+
+    private final AmazonCloudWatch cloudWatch;
+
+    public TestController() {
+        this.cloudWatch = AmazonCloudWatchClientBuilder.standard().build();
+    }
 
     @GET
     @Path("/env")
@@ -39,5 +51,22 @@ public class TestController {
 
         result.put("queryParams", paramMap);
         return result;
+    }
+
+    @GET
+    @Path("/metric")
+    public void postMetric(Request req) {
+
+        MetricDatum datum = new MetricDatum()
+                .withMetricName("TestMetric")
+                .withUnit(StandardUnit.None)
+                .withValue(1.0);
+
+        PutMetricDataRequest request = new PutMetricDataRequest()
+                .withNamespace("TestServiceAppMetrics")
+                .withMetricData(datum);
+
+        PutMetricDataResult response = cloudWatch.putMetricData(request);
+        log.debug("id: " + response.getSdkResponseMetadata().getRequestId());
     }
 }

@@ -1,0 +1,101 @@
+EnvironmentConfigurationMetadata:
+  Description: Configuration created from the EB CLI using "eb config save".
+  DateCreated: '1537295529000'
+  DateModified: '1537295529000'
+Platform:
+  PlatformArn: arn:aws:elasticbeanstalk:us-west-2::platform/Docker running on 64bit Amazon Linux/2.12.2
+OptionSettings:
+  aws:elasticbeanstalk:command:
+    BatchSize: '1'
+    BatchSizeType: Fixed
+    IgnoreHealthCheck: true
+    DeploymentPolicy: Rolling
+  AWSEBAutoScalingScaleUpPolicy.aws:autoscaling:trigger:
+    UpperBreachScaleIncrement: '0'
+  aws:elasticbeanstalk:application:environment:
+    secret-key: secret-value
+  aws:autoscaling:asg:
+    Custom Availability Zones: us-west-2a,us-west-2b,us-west-2c
+  aws:autoscaling:updatepolicy:rollingupdate:
+    RollingUpdateType: Health
+    RollingUpdateEnabled: true
+  aws:elb:policies:
+    ConnectionDrainingEnabled: true
+  AWSEBAutoScalingGroup.aws:autoscaling:asg:
+    MinSize: '2'
+    Availability Zones: Any 2
+    MaxSize: '2'
+  AWSEBAutoScalingScaleDownPolicy.aws:autoscaling:trigger:
+    LowerBreachScaleIncrement: '0'
+  aws:elasticbeanstalk:cloudwatch:logs:
+    StreamLogs: true
+  aws:elb:loadbalancer:
+    CrossZone: true
+  aws:elasticbeanstalk:environment:
+    ServiceRole: aws-elasticbeanstalk-service-role
+    LoadBalancerType: network
+  aws:elasticbeanstalk:healthreporting:system:
+    ConfigDocument:
+      Version: 1
+      CloudWatchMetrics:
+        Instance:
+          RootFilesystemUtil: null
+          CPUIrq: null
+          LoadAverage5min: null
+          ApplicationRequests5xx: null
+          ApplicationRequests4xx: null
+          CPUUser: null
+          LoadAverage1min: null
+          ApplicationLatencyP50: null
+          CPUIdle: null
+          InstanceHealth: null
+          ApplicationLatencyP95: null
+          ApplicationLatencyP85: null
+          ApplicationLatencyP90: null
+          CPUSystem: null
+          ApplicationLatencyP75: null
+          CPUSoftirq: null
+          ApplicationLatencyP10: null
+          ApplicationLatencyP99: null
+          ApplicationRequestsTotal: null
+          ApplicationLatencyP99.9: null
+          ApplicationRequests3xx: null
+          ApplicationRequests2xx: null
+          CPUIowait: null
+          CPUNice: null
+        Environment:
+          InstancesSevere: 60
+          InstancesDegraded: 60
+          ApplicationRequests5xx: 60
+          ApplicationRequests4xx: 60
+          ApplicationLatencyP50: 60
+          ApplicationLatencyP95: 60
+          ApplicationLatencyP85: 60
+          InstancesUnknown: null
+          ApplicationLatencyP90: 60
+          InstancesInfo: null
+          InstancesPending: null
+          ApplicationLatencyP75: 60
+          ApplicationLatencyP10: 60
+          ApplicationLatencyP99: 60
+          ApplicationRequestsTotal: 60
+          InstancesNoData: null
+          ApplicationLatencyP99.9: null
+          ApplicationRequests3xx: 60
+          ApplicationRequests2xx: 60
+          InstancesOk: 60
+          InstancesWarning: null
+      Rules:
+        Environment:
+          Application:
+            ApplicationRequests4xx:
+              Enabled: false
+    SystemType: enhanced
+  aws:autoscaling:launchconfiguration:
+    IamInstanceProfile: aws-elasticbeanstalk-ec2-role
+    InstanceType: t2.micro
+    EC2KeyName: test-service-key-pair
+EnvironmentTier:
+  Type: Standard
+  Name: WebServer
+AWSConfigurationTemplateVersion: 1.1.0.0

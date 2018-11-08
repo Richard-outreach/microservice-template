@@ -1,9 +1,6 @@
 package org.outreach;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
-import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
-import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import org.jooby.Jooby;
 import org.jooby.apitool.ApiTool;
 import org.jooby.json.Gzon;

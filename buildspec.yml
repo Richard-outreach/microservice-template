@@ -21,5 +21,6 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '[{"name":"test-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > app.json
 artifacts:
-    files: Dockerrun.aws.json
+    files: app.json
